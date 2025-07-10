@@ -1,0 +1,96 @@
+/* @layer base {
+  :root {
+    --theme-color: red;
+  }
+}
+
+@layer theme {
+  html[data-theme=dark] {
+
+  }
+}
+
+html {
+  container-type:inline-size;
+  container-type:html;
+} */
+
+/* div#first {
+  container-type:inline-size;
+  container-name: test;
+  width:400px;
+}
+div#second {
+  width:600px;
+}
+div#third {
+  width:800px;
+}
+@container test (width < 500px) {
+  h1 {
+    font-size:5cqw;
+    color:red;
+  }
+} */
+
+
+
+/* @layer base, component, utility, media;
+@layer media {
+  @media screen and (width < 568px) {
+    h1 {
+      color:blue;
+    }
+  }
+}
+@layer base {
+  h1 {
+    color:red;
+  }
+} */
+
+
+
+/* @layer base, theme, component, utility;
+@layer base {
+  :root {
+    --dark-theme-brand-color:  hsl(182, 68%, 21%);
+    --light-theme-brand-color: hsl(182, 83%, 43%);
+  }
+}
+@layer theme {
+  :root {
+    --brand-color: var(--light-theme-brand-color);
+  }
+}
+@layer component {
+  :root {
+    --brand-color-component: var(--brand-color);
+  }
+} */
+
+
+/* @layer  component, base;
+
+@layer base {
+  h1 {
+    color:red;
+  }
+}
+
+@layer component {
+  h1 {
+    color:blue;
+  }
+} */
+
+
+/* div {
+  --text-color: red;
+}
+h1 {
+  color: var(--text-color) !important;
+}
+body:has(h1) h1 {
+  color: blue;
+} */

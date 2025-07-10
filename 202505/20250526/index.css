@@ -1,0 +1,34 @@
+div:not(&:has(:link)) {
+  line-height: 50px;
+  word-spacing: 50px;
+  letter-spacing: 5px;
+  text-indent: 100px;
+  white-space: nowrap;
+}
+
+div:has(:link) {
+  text-align: right;
+  /* direction:rtl */
+}
+:link {
+  text-decoration: none;
+  color: #ff00ff;
+}
+
+#test {
+  font-family: 'a', 'HangeulNuri-Bold', sans-serif;
+
+  font-size: 20vw;
+  font-weight: 900;
+}
+#test span {
+  font-size: 2rem;
+  font-style: oblique;
+}
+
+@font-face {
+    font-family: 'HangeulNuri-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_three@1.0/HangeulNuri-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

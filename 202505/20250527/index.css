@@ -1,0 +1,30 @@
+div, span {
+  position:sticky;
+  left:200px;
+  top:50px;
+  /* right:0px; */
+  /* top:50px; */
+  /* bottom:10px; */
+  box-sizing: border-box;
+  width:100px; height:100px;
+  display:inline-block;
+  border-radius: 50%;
+  background-image: linear-gradient(30deg, red, blue);
+  /* background-color: red; */
+  text-align: center;
+  margin:20px;
+  /* padding:20px; */
+  border: solid 2px black;
+  overflow: hidden;
+}
+img {
+  transform: rotateZ(45deg);
+  /* position: absolute;
+  top:50px; */
+  object-fit: scale-down;
+  width:100%; height:100%;
+}
+
+img:hover {
+  cursor:pointer;
+}
