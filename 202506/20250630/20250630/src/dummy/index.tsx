@@ -1,0 +1,1 @@
+export { dummy as dummy_boards } from './boards';
