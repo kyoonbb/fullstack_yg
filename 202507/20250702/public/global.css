@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-naver-green:#2db400;
+  --color-naver-green-deep:#1d9f00;
+}
+
+@custom-variant dark {
+  &:where([data-theme=dark] *) {
+    @slot;
+  }
+}
+@custom-variant light {
+  &:where([data-theme=light] *) {
+    @slot;
+  }
+}
+
+@utility button {
+  cursor:pointer;
+  border-radius: 5px;
+  background-color: var(--color-naver-green);
+  @variant hover {
+    background-color: var(--color-naver-green-deep);
+  }
+}
+
+@utility button-normal {
+  border:1px black solid;
+  @apply button;
+}
+@utility button-ghost {
+  border:none;
+  @apply button;
+}
+
+@utility invisible {
+  display:none;
+}
+
+@utility tab-size-* {
+  margin-left: calc(--value(number) * 0.5rem);
+}
