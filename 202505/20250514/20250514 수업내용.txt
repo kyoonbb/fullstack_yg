@@ -1,0 +1,236 @@
+HTML 태그중에 일부를 배우게 된다
+head와 body 태그중 head 태그에 들어가는 태그에 대해서 배운다
+
+head
+    현재 웹페이지를 구성하는 정보를 표기하는 태그들이 들어가게 된다
+    결국 오늘 배우는 태그들은 웹페이지를 어떻게 구성하는지 알려주는 태그
+
+title
+    해당하는 웹페이지의 제목을 지정하는 태그
+
+    작성법 - <title>제목</title>
+
+meta
+    웹페이지의 상세한 정보를 표기하는것을 metadata
+    metadata에는 encoding만 존재하는가?
+    그래서 meta 태그는 태그만으로 어떤 동작을 하는게 아니라
+    추가적인 속성 옵션으로 정보를 표기한다
+
+    작성법 - <meta name=value/>
+    속성
+        charset
+            encoding이 어떻게 되는지를 명시하는 metadata
+            한글로 작성할 것이기 때문에 보통은 UTF-8, UTF-16을 넣는다
+            작성법 - <meta charset="value"/>
+        
+        name="description"
+            현재 웹페이지에 대한 설명을 표기하는 metadata
+            작성법 - <meta name="description" content="설명"/>
+
+        name="author"
+            현재 웹페이지를 작성한 저자를 표기하는 metadata
+            작성법 - <meta name="author" content="저자명"/>
+
+        name="copyright"
+            저작권 정보를 표기하는 metadata
+            작성법 - <meta name="copyright" content="저작권정보"/>
+
+        name="robots"
+            검색엔진이 내 웹페이지를 검색할 수 있는지 여부를 결정하는 metadata
+            작성시 2개를 ,로 구분해서 작성
+            index, noindex
+                웹페이지를 검색엔진에서 노출할지 여부
+            follow, nofollow
+                index 일때 서브링크 노출 여부
+            작성법 - <meta name="robots" content="여부타입"/>
+
+        name="keywords"
+            검색엔진에서 이 웹페이지를 표기해야하는 상황에 필요한 키워드를 작성하는 metadata
+            작성법 - <meta name="keywords" content="a,b,c,d"/>
+
+        name="revisit-after"
+            검색엔진 재방문 기간 변경
+            작성법 - <meta name="revisit-after" content="7 days"/>
+
+        name="rating"
+            콘텐츠의 연령별에 따라 구분하는 metadata
+            general
+                표준 웹사이트
+            mature
+                성인 콘텐츠가 포함된 웹사이트
+            작성법 - <meta name="rating" content="레이팅"/>
+
+link
+    추가할 정보가 너무 길다면 따로 파일로 만들어두고 연결시킬 수 있다
+    연결을 하기위한 태그
+
+    이미 만들어둔 특정 목적의 파일 내용을 웹페이지에 연결해서 가져오는 태그
+    외부 파일을 웹페이지에 연결하기위한 태그이기 때문에
+    아이콘, CSS(Style), JS(Code), ... 등을 연결할때 이용
+
+    작성법 - <link rel="타입" href="파일위치"/>
+    예제
+        <link rel="icon shortcut" href="icon.ico/>
+        <link rel="stylesheet" href="css.css"/>
+
+meta
+    SNS가 웹사이트의 링크를 받아서 처리할때 카드의 형태로 자세히 보여주는 기능
+    카드 속성 metadata
+
+    작성법
+        - 1. <meta name="twitter:key" content="value"/>
+        - 2. <meta property="og:key" content="value"/>
+
+    OpenGraph
+        title
+            카드가 만들어질때 카드 위에 적히는 제목
+            <meta property="og:title" content="제목"/>
+        description
+            카드가 만들어질때 카드 제목 아래에 적히는 설명
+            <meta property="og:description" content="설명"/>
+        image
+            카드가 만들어질때 카드 상단이 붙는 이미지
+            <meta property="og:image" content="이미지 주소"/>
+        url
+            카드를 클릭시 이동하는 경로
+            <meta property="og:url" content="이동 주소"/>
+
+    Twitter
+        title
+            카드가 만들어질때 카드 위에 적히는 제목
+            <meta name="twitter:title" content="제목"/>
+        description
+            카드가 만들어질때 카드 제목 아래에 적히는 설명
+            <meta name="twitter:description" content="설명"/>
+        image
+            카드가 만들어질때 카드 상단이 붙는 이미지
+            <meta name="twitter:image" content="이미지 주소"/>
+        url
+            카드를 클릭시 이동하는 경로
+            <meta name="twitter:url" content="이동 주소"/>
+        card
+            카드의 종류를 설명하는 속성
+                summary_large_image
+                    전체 내용과 큰 이미지로 만든 카드
+                summary
+                    전체 내용만
+                photo
+                    사진만
+            <meta name="twitter:card" content="카드 종류"/>
+
+
+연습 문제 1
+    전연령 전용 컨텐츠 사이트
+    크레파스를 구매 및 교환하는 사이트
+
+    사이트 파일명 - crayons.html
+
+//////////////////////////////////////////////// 연습 문제 ////////////////////////////////////////////////
+### 연습 문제 1: 어린이 전용 교육 사이트
+
+**사이트 파일명** - `kids_education.html`
+
+**상황 설명**
+어린이들을 위한 교육 사이트를 만들고자 합니다. 이 사이트는 **전연령 전용 콘텐츠**로, 교육적이고 건강한 콘텐츠만을 제공합니다. 이 사이트에 필요한 기본적인 **meta** 정보와 **OpenGraph** 및 **Twitter Card** 메타 태그를 추가해야 합니다. 아래의 조건을 참고하여 적절한 메타 데이터를 작성하세요.
+
+**필수 사항:**
+
+1. **웹페이지 제목**은 "어린이 교육 사이트"로 설정하세요.
+2. **웹페이지 인코딩 방식**은 UTF-8로 설정하세요.
+3. **사이트 설명**은 "어린이들을 위한 교육적인 콘텐츠를 제공합니다."로 작성하세요.
+4. **저자 정보**는 "John Doe"로 설정하세요.
+5. **저작권**은 "2025 John Doe, All rights reserved."로 표기하세요.
+6. **검색엔진에 표시되는지 여부**는 "index"로 설정하고, 링크는 "follow"로 설정하세요.
+7. **키워드**는 "어린이 교육, 온라인 학습, 교육 사이트"로 설정하세요.
+8. **SNS 카드 정보**
+
+   * **OpenGraph**
+
+     * 제목: "어린이 교육 사이트"
+     * 설명: "어린이들을 위한 다양한 교육 자료를 제공합니다."
+     * 이미지 URL: "[https://example.com/og\_image.jpg](https://example.com/og_image.jpg)"
+     * 웹사이트 URL: "https\://kids\_education.com"
+   * **Twitter Card**
+
+     * 제목: "어린이 교육 사이트"
+     * 설명: "어린이들을 위한 다양한 교육 자료를 제공합니다."
+     * 이미지 URL: "[https://example.com/twitter\_image.jpg](https://example.com/twitter_image.jpg)"
+     * 카드 유형: "summary\_large\_image"
+
+**작성 요구사항:**
+위의 조건을 충족하는 **head 태그** 내의 메타데이터와 관련된 태그를 작성하세요. `meta` 태그를 적절하게 사용하고, **OpenGraph** 및 **Twitter Card**의 메타 태그도 포함해야 합니다.
+
+---
+
+### 연습 문제 2: 성인용 영화 리뷰 사이트
+
+**사이트 파일명** - `adult_movies_review.html`
+
+**상황 설명**
+성인용 영화 리뷰 사이트를 운영하고 있습니다. 이 사이트는 성인 콘텐츠가 포함된 웹사이트입니다. 다음은 이 사이트의 **meta** 태그에 포함할 정보를 나열한 것입니다.
+
+**필수 사항:**
+
+1. **웹페이지 제목**은 "성인 영화 리뷰 사이트"로 설정하세요.
+2. **웹페이지 인코딩 방식**은 UTF-8로 설정하세요.
+3. **사이트 설명**은 "성인 영화를 포함한 다양한 영화 리뷰와 평가를 제공합니다."로 작성하세요.
+4. **저자 정보**는 "Jane Doe"로 설정하세요.
+5. **저작권**은 "2025 Jane Doe, All rights reserved."로 표기하세요.
+6. **검색엔진에 표시되지 않도록 설정**하고, **링크는 nofollow**로 설정하세요.
+7. **키워드**는 "성인 영화, 영화 리뷰, 성인 콘텐츠"로 설정하세요.
+8. **SNS 카드 정보**
+
+   * **OpenGraph**
+
+     * 제목: "성인 영화 리뷰 사이트"
+     * 설명: "성인 영화를 포함한 다양한 영화 리뷰를 제공합니다."
+     * 이미지 URL: "[https://example.com/adult\_movie.jpg](https://example.com/adult_movie.jpg)"
+     * 웹사이트 URL: "https\://adult\_movies\_review\.com"
+   * **Twitter Card**
+
+     * 제목: "성인 영화 리뷰 사이트"
+     * 설명: "성인 영화를 포함한 다양한 영화 리뷰를 제공합니다."
+     * 이미지 URL: "[https://example.com/adult\_movie\_twitter.jpg](https://example.com/adult_movie_twitter.jpg)"
+     * 카드 유형: "summary"
+
+**작성 요구사항:**
+위의 조건을 충족하는 **head 태그** 내의 메타데이터와 관련된 태그를 작성하세요. **rating** 속성도 추가하고, **OpenGraph** 및 **Twitter Card** 메타 태그도 포함해야 합니다.
+
+---
+
+### 연습 문제 3: 음악 스트리밍 서비스 사이트
+
+**사이트 파일명** - `music_streaming_service.html`
+
+**상황 설명**
+음악 스트리밍 서비스 사이트를 만듭니다. 이 사이트는 모든 연령대에서 사용할 수 있는 음악 서비스입니다. **meta** 태그를 적절히 사용하여 웹페이지 정보를 제공하고, **SNS 카드** 정보를 추가해야 합니다.
+
+**필수 사항:**
+
+1. **웹페이지 제목**은 "최고의 음악 스트리밍 서비스"로 설정하세요.
+2. **웹페이지 인코딩 방식**은 UTF-8로 설정하세요.
+3. **사이트 설명**은 "최고의 음악을 스트리밍하고, 다양한 장르를 제공합니다."로 작성하세요.
+4. **저자 정보**는 "MusicStream Inc."로 설정하세요.
+5. **저작권**은 "2025 MusicStream Inc., All rights reserved."로 표기하세요.
+6. **검색엔진에 표시될 수 있도록 설정**하고, **링크는 follow**로 설정하세요.
+7. **키워드**는 "음악 스트리밍, 온라인 음악, 최신 음악"으로 설정하세요.
+8. **SNS 카드 정보**
+
+   * **OpenGraph**
+
+     * 제목: "최고의 음악 스트리밍 서비스"
+     * 설명: "최고의 음악을 스트리밍하고, 다양한 장르를 제공합니다."
+     * 이미지 URL: "[https://example.com/music\_og\_image.jpg](https://example.com/music_og_image.jpg)"
+     * 웹사이트 URL: "https\://music\_streaming\_service.com"
+   * **Twitter Card**
+
+     * 제목: "최고의 음악 스트리밍 서비스"
+     * 설명: "최고의 음악을 스트리밍하고, 다양한 장르를 제공합니다."
+     * 이미지 URL: "[https://example.com/music\_twitter\_image.jpg](https://example.com/music_twitter_image.jpg)"
+     * 카드 유형: "summary\_large\_image"
+
+**작성 요구사항:**
+위의 조건을 충족하는 **head 태그** 내의 메타데이터와 관련된 태그를 작성하세요. **OpenGraph** 및 **Twitter Card** 메타 태그를 포함해야 하며, 음악 관련 사이트라는 점을 고려해 적절한 정보를 제공해야 합니다.
+
+https://zoom.us/rec/share/MU_waFOy2z-iEChvoohloZ0ooUvBcXXSHEV9XEt5X8L-gRM9qFzk57_pXCtRsd1j.ZRuuLgfBrAbyVZoq 
+암호: Fk7$d4?Z
