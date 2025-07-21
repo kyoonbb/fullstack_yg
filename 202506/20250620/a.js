@@ -1,1 +1,1 @@
-export default 'hello';
+export default ' +   a hello'; // export 연습임 다른 js 파일 만들어서 

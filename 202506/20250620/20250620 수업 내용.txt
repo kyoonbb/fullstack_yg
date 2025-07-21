@@ -1,0 +1,214 @@
+JS가 가지는 매우 크고 중요한 단점
+JS는 애초부터 브라우저를 제어하기위해서 만들어지다보니 브라우저에서만 사용이 가능했다
+JS는 환경에 제약이 심하다보니 매우 종속적인 언어가 되었다
+
+하지만 어차피 브라우저에서만 사용할것이기 때문에 큰 문제는 아니었다
+이게 큰 문제가된 이유
+
+JS를 브라우저에 종속적이지 않고 어떤 환경에서라도 실행할 수 있도록 만들어진 프로그램
+JS 독립 실행기 => NodeJS (우리가 쓸 것이다.)
+
+NodeJS를 이용해서 웹페이지를 손쉽게 구현하기위한 Framework를 만들게 되었다
+Framework
+  특정 구조의 프로그램을 손쉽게 만들 수 있도록 미리 만들어둔 프로그램 집합
+
+이러한 Framework중 Frontend 개발자들이 많이 이용하는 집합이 있는데 => React
+
+React - nodejs 쓰게해는 프레임워크 중 하나임 (제품 중 하나)
+  독립적으로 JS를 실행해서 웹페이지를 빠르고 효율적으로 개발하는 Framework
+
+  JS -> 독립 실행(NodeJS) -> React 개발 -> 독립 실행(NodeJS) -> JS
+
+  그래서 오늘은 NodeJS를 사용하는 방법
+
+NodeJS 설치 : LTS라고 제일 안전하면서 최신 버전 깔아야함 그냥 최신버전 깔면 안됨(매우 불안정함)
+  https://nodejs.org/dist/v22.16.0/node-v22.16.0-x64.msi
+  그리고 이미지 첨부한거 체크해야 자동으로 관련된 툴 설치할거냐? 란 뜻임 그래야 수월
+  그래서 툴 설치가 뜰것이다 파워쉘 뜨고 등등 그리고 중간에 끄면 안됨 지웠다 다시 깔아야함
+  중간에 체크하고 설치
+  설치 후 VSCode 재실행
+
+  만약 가끔 버전 업데이트할때 이전버전 지우고 깔아야 수월
+
+  
+NodeJS 사용 방법
+  Terminal(Command) 라고 부르는 창에서 명령어로 사용
+  버전 확인 명령어
+    node -v
+  
+  VSCode에서 사용 방법
+    전용 Ternimal을 열어서 사용
+    Ctrl + Shift + `(~)
+
+  주의사항
+    체크한 내용이 NodeJS 설치 이후에 Powershell로 추가 설치
+    근데 이게 권한 문제로 안될때가 있다
+
+    Powershell을 관리자 권한으로 키고
+      Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+    이걸 실행하고 다시 설치하면 된다
+
+NodeJS 명령어
+  npm
+    NodeJS를 쓰게되면 코드를 독립적으로 실행할 수 있게된다
+    독립 실행이 가능하게 만들어지다보니 남이 만든 코드를 쓰는 경우도 매우 많다
+    남이 만든 코드 묶음을 package라고 부르는데 이러한 package를 많이 이용한다
+    nodejs package manager 라고 package를 손쉽게 이용할 수 있도록 만드는 package 목록 명령어
+
+  npm init
+    목록을 그냥 다운로드만하면 내가 무엇을 다운로드했고 사용중인 버전이 몇버전인지 확인이 어렵다
+    목록을 package.json 이라는 파일로 따로 관리
+    이러한 package.json을 생성하는 명령어
+    npm init -y
+      모든것을 자동으로 생성하는 옵션
+
+  node 파일명.js
+    해당하는 파일명을 독립적으로 실행하는 명령어
+
+  npm install 패키지명 패키지명 ...
+    package 목록이 존재하는 사이트에서 package를 다운로드받아오는 명령어
+    다운받을 패키지명을 뒤에 붙여야지만 원하는 패키지를 다운받을 수 있다
+    패키지명을 적으면 적는대로 존재하는걸 모두 다운받는 명령어
+    다운로드 받은 파일은 node_modules 폴더에 저장
+    
+    이렇게 node_modules에 저장되면 좋은점
+      각각의 프로젝트가 따로 버전 관리가 가능하다
+    node_modules에 저장되면 나쁜점
+      버전이 따로 관리되기 때문에 공통으로 사용하는 패키지는 매번 따로 설치해야 한다
+
+    그래서 이러한걸 해결하기위해 옵션으로 저장위치를 변경할 수 있다
+      npm install -S => 기본값, node_modules, 현재 프로젝트에만
+      npm install -D => node_modules, 개발시에만
+      npm install -g => global 옵션, node_modules가 아닌 nodejs 자체에 설치
+  
+  npm uninstall 패키지명 ...
+    설치된 package중 불필요한 package를 제거하는 명령어
+
+  npm update 패키지명 ...
+    패키지명 없이 작성시 "모두 업데이트"
+    이게 중요한게 단순하게 최신 버전으로 업데이트를 하는게 아니라
+    이따 배우는 package.json의 버전 명시법에 따라 호환되도록 업데이트
+      react@1.2 라고 버전 명시도 가능
+
+  npm prune (가지치기 불필요한거 제거)
+    명단에 존재하는 패키지를 제외한 나머지 패키지를 삭제하는 명령어
+
+  --npm cache clean--
+    패키지를 설치할때 업데이트를 빠르게 하기위해서 캐싱이란 작업을 한다
+    이러한 캐싱을 깔끔하게 제거하는 작업 명령어
+    npm 5 버전 이후 자동화
+    npm cache verify -> 캐시가 안전한지 확인
+
+  npm start, npm test, npm run [명령어]
+    실행 대체 명령어
+    package.json에 명령어를 start, test, 명령어로 등록해두면 
+    그걸 npm start, npm test, npm run 명령어 로 실행하는 명령어 단축키
+
+package.json
+  type
+    type:"module" or type:"CommonJS"를 적는 데이터
+    module 타입은 JS와 문법은 동일한데 몇몇가지 기능을 추가하기위해서 살짝 달라진 기능을 의미
+    이러한 module 방식과 원래 CommonJS방식 중에 무엇을 이용할지 선택하는것
+
+    가끔 type이 module이어야지만 쓸 수 있는 패키지가 존재
+  
+  dependencies
+    의존성 목록
+    npm 으로 -S 설치된 목록
+    설치된 패키지 이름과 버전이 명시
+
+  devDependencies
+    -D 로 설치된 의존성 목록
+    npm 으로 -D 설치된 목록
+    설치된 패키지 이름과 버전이 명시
+
+  version - 패치 구분 기준
+    의존성 목록에 설치된 패키지처럼 버전을 명시하는 것
+
+    개발자들이 개발을할때 버전(v3)으로 개발품을 관리
+
+    개발을할때 업데이트시 3가지 상황이 존재하는데
+      1. 전체적인 기능에 변화는 없고 세부적인 효율 관리
+      2. 기능에 약간의 변화는 있는데 사용에는 문제가 없는
+      3. 대격변. 기능에도 많은 변화가 있고 동일한 사용법으로 사용이 불가능할때
+
+    Major.Minor.Patch 
+      Patch 변경 - 세부적인 변화
+      Minor 변경 - 약간의 변화
+      Major 변경 - 큰 변화
+
+    버전 앞에 특수한 문자가 붙는것으로 호환성을 명시도 가능
+      Major.Minor.Patch             => 정확히 해당 버전
+      ^Major.Minor.Patch            => 해당하는 버전과 호환되는 버전
+      <Major.Minor                  => 버전 범위
+      >=Major.Minor                 => 버전 범위
+      Major.Minor ~ Major.Minor     => 버전 범위
+      ~Major                        => 하위버전 상관 없이
+      ~Major.Minor                  => 하위버전 상관 없이
+
+  scripts
+    미리 정의한 명령어로 단축 명령어를 만드는 방법
+    "명령어": "실제 실행될 명령어"
+
+    주의사항
+      start, test는 npm start, npm test로 바로 실행 가능
+      나머지 명령어들은 npm run 명령어로 적어야한다
+
+설치된 패키지를 (import/export)하는 기능
+  package.json의 type이 module이냐 commonjs냐에 따라 문법이 다르다
+
+  commonjs
+    export
+      module.exports 라는 변수에 대입하면 된다
+        module.exports = 함수; module.exports = {};
+
+    import
+      require('파일명') 을 적으면 된다
+      그러면 module.exports에 넣은 것을 가져올 수 있다
+      함수를 통해서 가져올걸 읽어서 가져오는 방식
+
+  module
+    export
+      export default {}
+      export {변수};
+      내보내고 싶은 대상을 export {이름}; 내보내기할 수 가 있다
+
+      주의사항
+        export default와 export 는 서로 다른 내보내기
+        export default는 파일마다 1개씩만 가능
+        export는 무한히 적을 수 있다
+
+      이름을 바꾸면서 내보낼 수 있도록 as 지원
+        export {이름 as 새이름};
+
+    import
+      import {이름} from '파일명';
+      여기서 적히는 이름은 export에서 내보내기할때 적은 이름과 "동일"해야한다
+      이름을 바꾸면서 가져올 수 있도록 as 지원
+        import {이름 as 새이름} from '파일명';
+
+      전체적으로 1개만 가져올거라면 굳이 {}를 적는게 불편하다 ( 중괄호는 구조분해 할당 )
+      그래서 export default는 이름을 마음대로해서 내보낼 수 있고 가져올때도 마음대로 가져올 수 있다
+        import 이름 from '파일명';
+      {} 안에 들어있지만 않으면 된다
+
+//////////////////////////////////////////////////////////////////////////////////////////
+npm install react react-dom
+npm install react react-router
+npm install -D react-router-dom
+npm uninstall react-router
+npm intstall bcrypt
+node start.js
+npm start
+//////////////////////////////////////// 연습 문제 ////////////////////////////////////////
+0. 아래 모든 문제에 적용되는 규칙
+  - 1. 문제는 module,  commonjs 방식 두가지 방식으로 한번씩 푸시오.
+  - 2. 문제에 필요한 패키지는 따로 명시하지 않는다면 직접 만들어서 푸시오.
+
+1. 암호화 패키지를 이용하여 변수에 받아온 텍스트를 암호화 후 출력하는 프로그램
+  - 1. 암호화 패키지는 bcrypt 사용
+
+2. 수학 패키지를 이용하여 숫자 2개를 변수에 받아와서 사칙연산 값을 모두 출력하는 프로그램
+
+https://zoom.us/rec/share/gRNSEgjYeCfdzGIKOiQQ3H5NiiSioMrBK7m6M34u_m7I6BQnCRhyjtS27nKJcE2_.M5FYu86BLatrRUHd 
+암호: Q@3e&d%F
