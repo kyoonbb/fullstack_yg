@@ -1,0 +1,144 @@
+오늘 배울 내용은 멀티미디어 태그들을 HTML에서 어떻게 사용하고 어떤 효과가 생기는지에 대해서
+
+이미지
+    img
+        HTML 안에 내가 원하는 이미지를 포함시키기위한 기능
+        태그 만으로는 어떤 이미지를 포함할 지 알 수 없기에 속성으로 사용할 이미지 위치를 지정하여 사용
+        작성법 - <img attibute=value/>
+        속성값
+            src
+                이미지를 표기하기위한 파일이 어느 위치에 있는지 작성
+                작성법
+                    - 1. data:image~~~~
+                        텍스트로 이미지를 표기한것
+                    - 2. https://~~~~ or http://~~~~
+                        외부에 존재하는 서버에서 이미지를 가져오는것
+                        이게 가능한 이유는 우리가 이미지나 영상 같은 멀티미디어 태그에서 source를 가져올때 
+                        서버에서 "한번에" 가져오는것이 아니라 source가 필요할때 "사용자 PC"에서 "직접 source"로 요청 후 획득
+                    - 3. /~~~~
+                        현재 내 서버에서 제공하는 이미지를 가져오는것
+                        /apple.jpg => http://domain.com/apple.jpg
+                    - 4. ./~~~~
+                        현재 제공중인 .html의 옆에 있는 파일을 가져오는것
+                        index.html -> /doc/index.html
+                        ./apple.jpg => /doc/apple.jpg
+            alt
+                이미지의 source가 접근 불가능하여 표기가 안될때 대신 표기할 텍스트
+                작성법 - <img src="" alt="이미지 없음"/>
+            loading
+                이미지가 화면에 언제 호출될지를 결정하는 속성
+                값으로 지정 eager, lazy
+                작성법 - <img src="" loading="lazy"/>
+            width, height
+                img, video의 해상도 크기 지정
+                작성법 - <img width="50px" height="50px"/>
+    
+    figure
+        img 태그에 추가적인 텍스트 설명을 붙이기위해서 hgroup처럼 감싸주는 태그
+        작성법 - <figure> <img/> </figure>
+
+    figcaption
+        figure태그 안에 넣음으로써 해당 이미지의 설명을 작성하는 태그
+        작성법 - <figure> <img/> <figcaption>설명</figcaption> </figure>
+
+    svg
+        이미지의 자체적인 한계인 해상도를 극복하기위해 만들어진 path 구조 태그
+        일러스트처럼 공식을 작성하고 공식에 따라서 그림이 사용자 PC에서 그려지는 이미지 구조
+        작성법 - <svg> <path/> <circle/> </svg>
+
+    picture
+        img 태그를 source를 이용해서 보여주는 그룹 태그
+        src 속성 대신 source 태그로 이미지를 보여주기위해서 만든 태그
+        작성법 - <picture> <source/> <source/> <img/> </picture>
+        주의사항
+            source의 특정 환경을 주입해서 환경별로 다른 이미지를 로딩하게하는 태그다
+            즉, 이미지가 로딩이 안된다고 다음 이미지를 로딩하진 않는다
+            또한, 용도가 다르다보니 source 태그 말고 마지막에 img 태그가 "무조건" 1개 필수
+
+    source
+        picture 태그에 넣어서 이미지를 표기하는 태그
+        작성법 - <picture> <source/> <source/> <img/> </picture>
+        속성값
+            srcset
+                해당하는 이미지를 작성하는 속성
+                작성법 - <source srcset="a.jpg"/>
+            media
+                조건을 작선(미디어 쿼리)
+                작성법 - <source media="(min-width:500px)"/>
+
+비디오
+    video
+        img 처럼 존재하는 video 파일을 연결하여 사용자에게 제공하는 기능
+        작성법 - <video attibute=value></video>
+        속성값
+            src
+                해당하는 태그에 표기할 영상 원본의 위치를 지정
+                작성법 - <video src=""></video>
+            controls
+                해당하는 비디오에 컨트롤 패널을 생성하는 속성
+                작성법 - <video controls src=""></video>
+            autoplay
+                해당하는 비디오에서 컨트롤 패널 없이 자동 실행하는 속성
+                작성법 - <video autoplay src=""></video>
+                주의사항
+                    정책상의 이유 때문에 사운드 포함시 자동 실행이 안된다
+            muted
+                해당하는 비디오의 사운드를 음소거하는 속성
+                작성법 - <video muted src=""></video>
+    
+    source
+        video 또는 audio 태그 안에 작성해서 src 속성을 대체하기위한 태그
+        작성법 - <video> <source/> <source/> </video>
+        속성값
+            src
+                해당하는 source에서 지정할 파일 원본 주소
+                작성법 - <source src=""/>
+
+오디오
+    audio
+        img 처럼 존재하는 audio 파일을 연결하여 사용자에게 제공하는 기능
+        작성법 - <audio attibute=value></audio>
+        속성값
+            src
+                해당하는 태그에 표기할 영상 원본의 위치를 지정
+                작성법 - <audio src=""></audio>
+            controls
+                해당하는 오디오에 컨트롤 패널을 생성하는 속성
+                작성법 - <audio controls src=""></audio>
+            autoplay
+                해당하는 오디오에서 컨트롤 패널 없이 자동 실행하는 속성
+                작성법 - <audio autoplay src=""></audio>
+                주의사항
+                    정책상의 이유 때문에 사운드 포함시 자동 실행이 안된다
+            muted
+                해당하는 오디오의 사운드를 음소거하는 속성
+                작성법 - <audio muted src=""></audio>
+    
+    source
+        video 또는 audio 태그 안에 작성해서 src 속성을 대체하기위한 태그
+        작성법 - <audio> <source/> <source/> </audio>
+        속성값
+            src
+                해당하는 source에서 지정할 파일 원본 주소
+                작성법 - <source src=""/>
+
+웹 내장
+    iframe
+        외부에 존재하는 "웹페이지"를 가져오는 태그
+        작성법 - <iframe attibute=value></iframe>
+        속성값
+            src
+                웹페이지의 주소를 적는 속성
+                작성법 - <iframe src="https://www.naver.com"></iframe>
+
+
+////////////////////////////////////////// 연습 문제 //////////////////////////////////////////
+0. 아래 문제들의 링크를 동일하게 완성하기
+    - 1. 기능 제거
+    - 2. 디자인 제거
+
+1. https://namu.wiki/w/%EB%B0%94%EB%82%98%EB%82%98
+2. https://namu.wiki/w/%EC%9A%A9%EA%B3%BC
+
+https://zoom.us/rec/share/tObjGqOCPvjPYzQVhaAITImFu1ZMM4TXvlCHcBtcoKwO5eUgHPugSVIJ23YKzWvu.mfOkzwaV3v2fBlGq 
+암호: ?PFC&qY8
