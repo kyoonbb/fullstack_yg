@@ -1,0 +1,17 @@
+nodejs : 0620 nodejs 처음 세팅 , 0623 : Typescript(tsx) 처음 세팅
+react : 0624(Vite,Nextjs 처음 나옴 개념 총설명) react(vite) 처음 세팅
+-> vite 개꿀팁 폴더 똑같은 환경에서 터미널 띄운다 -> ctrl + shift + `
+-> npm install 명령어 입력하면 패키지 적혀있는거 알아서 다 설치된다!
+-> npx vite 명령어 입력해서 결과물 확인하면 된다!
+react : 0625 전날한거 기본상태로 복원해서 앞으로 이걸 쓴다 앞으로 수업은 기본파일 기반수업 매번 세팅하는건 번거로우니 당연히 이거만하면 안된다
+ npm install 명령어를 써야 빨간색 오류가 사라지고
+ npx vite 명령어로 실행할 준비가 되어있을것이다
+
+
+$$$만약 오랜만에 복습하러 왔는데 node_modules폴더가 없다면 다른것들도 빨간 에러 뜰거다
+그때 위에처럼 하면 된다!
+
+$$$ 알아보는 법 package-lock.json, package.json 파일 있는경우 해당 폴더경로가서 쓰면 됨
+ex : PS D:\fullstack\202506\20250620> npm install 클릭!
+
+그리고 여깄는게 기본 패키지! 다음 수업할때 이거 긁어가기!
