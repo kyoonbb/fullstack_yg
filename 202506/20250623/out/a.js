@@ -1,4 +1,5 @@
 "use strict";
+// 설명을 위한 강사님의 예시 코드임 크게 신경 ㄴㄴ
 let body = document.body;
 let table = document.createElement("table");
 body.appendChild(table);

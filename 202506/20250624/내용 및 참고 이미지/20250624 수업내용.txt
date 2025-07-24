@@ -1,0 +1,258 @@
+React 문법을 나가기 전에 먼저 알아둬야할것
+React를 사용하는 방법은 React 문법을 작성하고 그걸 번역한 JS를 웹페이지에 포함하는것
+
+그래서 React를 쓰기위해서는 TS처럼 중간에 한번 거치는 단계가 필요하다는 의미
+그래서 React를 이용하는데에 있어서는
+단순히 React라는 프레임워크만 필요한게 아니라
+React를 번역하는 툴도 필요하다
+
+React의 원리
+  React 작성 -> Tool 로 번역 -> JS 추출 -> 웹페이지 추가
+
+많이 존재하는 React Tool 들 중에 각광받던 초기 툴 => CRA
+
+Tool
+  CRA(Create React App)
+    초창기 리액트에서 각광받던 툴
+    CSR 전용 툴이라는것 => SPA(Single Page Application) & CSR(Client Side Rendering)
+    초창기 리액트는 서버를 다녀오는 시간을 줄이고자 모든 코드를 사용자(Client)에 보관하고 동작하도록 구성
+    CSR(Client Side Rendering)
+      사용자 PC에서 그려진다
+    SPA(Single Page Application)
+      한개의 페이지로 웹페이지를 구성
+  
+  Vite -> 초반 React 수업용
+    CRA를 대체하기위해서 나온 툴
+    SPA, MPA, CSR, SSR 도무를 만들 수 있도록 구성된 툴
+      Single Page Application, Multi Page Application
+      Client Side Rendering, Server Side Rendering
+  
+  NextJS
+    기본적으로 MPA, SSR을 지원하고 세팅하고 있으며
+    CSR을 쓰거나 SPA를 쓰고자 한다면 특정 문법을 사용해야한다
+
+React의 초기
+  React의 기능을 JS에 작성을해서 사용
+  Class Component를 활용한 방식을 선호
+    class Component {}
+    React.addComponent();
+React의 후기
+  React의 문법을 JSX에 작성을해서 번역
+  Function Component을 활용한 방식을 선호
+    function () {}
+    <A/>
+
+React & Vite 설치 ### 경로 잘 들어가서 터미널에서 명령어 하나씩 입력하며 설치 진행
+  0. 확장자 통일
+    js -> ts
+    jsx -> tsx
+
+  1. npm init -y
+    nodejs 패키지 관리 환경 설정
+    type:module로 지정 $$$ 리액트의 기본 방식 만들 때 모듈 쓸거임 리콰이어 잘 안씀
+  
+  2. npm install react react-dom react-router-dom vite @vitejs/plugin-react typescript @types/react @types/react-dom @types/node
+      a@b -> 버전
+      @c  -> 이름
+    리액트를 사용하기위한 패키지 설치
+    tyepscript 이후는 typescript를 사용하기위한 전용
+  
+  3. 폴더 구조를 생성
+    src/ ### 이건 직접 만들어줘야 한다(폴더)!
+    components/ ### 이건 직접 만들어줘야 한다(폴더)!
+    사용될 파일이 저장될 폴더명 -> 우리가 앞으로 만들 JSX, TSX 를 보관할 폴더
+
+  4. vite.config.ts ### 이건 직접 만들어줘야 한다(파일)!
+
+    vite를 사용하기위한 설정 파일 $$$밑은 파일에 기본적으로 들어갈 내용이다.
+      import { defineConfig } from "vite";
+      import react from '@vitejs/plugin-react';
+      export default defineConfig({
+        옵션 내용
+      });
+
+  5. vite.config.ts 옵션 내용
+    plugins
+      third-party 플러그인을 설치하는 옵션
+      여기에 넣은 @vitejs/plugin-react 는 자동 갱신 플러그인
+
+    root
+      파일을 인식할 기본 경로
+
+    base
+      우리가 vitejs 서버를 열면 서버의 기본 경로
+
+    build
+      react 문법대로 작성된 파일을 JS로 번역할때 설정
+      outDir
+        번역한 후에 어디에 위치시킬지 위치
+    
+    server
+      react 문법대로 작성한 내용을 추출하지 않고 바로 실행할때 실행에 사용되는 옵션
+      port
+        포트번호
+      open
+        실행시 서버를 바로 여는지 여부
+
+    resolve
+      alias
+        경로 맵핑을 하는 옵션
+
+    import { defineConfig } from "vite";
+    import react from '@vitejs/plugin-react';
+    import path from 'path';
+
+    export default defineConfig({
+      plugins:[react()],
+      root:'./',
+      base:'/',
+      build: {
+        outDir:'./dest/'
+      },
+      server: {
+        port:9999,
+        open:true
+      },
+      resolve: {
+        alias: {
+          '@':path.resolve(__dirname, "src"), : @ 현재코드는src 지칭할래?라는 뜻
+          '$':path.resolve(__dirname, "components") : $ 현재코드는 components 지칭할래? 라는 뜻
+        }
+      }
+    });
+
+  6. npx tsc --init 
+    typescript 설정 파일 생성
+
+    {
+      "compilerOptions": {
+        "target": "esnext",
+        "jsx": "react-jsx",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true
+        "baseUrl": ".",
+        "paths": {
+          "@/*":["src/*"],
+          "$/*":["components/*"]
+        }
+      },
+      "include":["src","components"]
+    }
+  
+  7. index.html 파일 생성*
+    파일 안에
+    <div id="rootDiv"></div>
+    <script defer type="module" src="./src/file.tsx"></script>
+  
+  8. src/main.tsx 생성* $$$ src 폴더 안에 생성!
+    하이드레이션 파일
+    연결할 대상(#rootDiv)과 연결할 React Component를 가져와서 연결 코드를 작성
+
+    import react from 'react'; // 리액트 문법 활성화 코드
+    import client, {Container} from 'react-dom/client'; // CSR 동작 구조
+
+    let container:any = document.getElementById("rootDiv"); // 실제 연결될 대상 tag 검색
+    let root = client.createRoot(container); // 연결될 대상 tag를 react 에서 사용할 태그로 변환
+
+    root.render( // 실제 react태그를 연결될 대상 태그에 렌더링
+      <div>Hello</div>
+    );
+
+  9. npx vite
+    npx vite 라는 실행 명령어로 작업중이 내용을 테스트하기위해 실행
+
+  10. component/app.tsx $$$ component 폴더 안에 생성!
+    리액트 FC(Function Component) 방식으로 제작된 컴포넌트를 제작 후 연결
+
+    기본 원형
+      import react from 'react';
+        // 리액트의 문법을 활성화하기위한 기능 무조건 기본으로 붙임!
+
+      interface props {};
+        // 함수형으로 만들기 때문에 받아오는 매개변수의 형태를 미리 정의해두는 자료형
+
+      const appComponent:react.FC<props> = 
+        // react의 Function Component 방식을 이용할 것이고 <props>는 매개변수로 props의 형태를 받아올것이다
+      (props:props)=>{
+        // 함수의 매개변수로 props 형태의 변수들을 가져온다
+        // 일반적인 함수의 매개변수는 (1,2,3) => ({1,2,3})
+        return <div></div>
+          // 리액트 문법대로 작성하고 번역할 문장
+          // 실제로 만들어진 HTML 태그 내용
+      };
+
+      export default appComponent;
+        // 만들어진 React.FC 내용을 외부에서 사용할 수 있도록 내보내는 기능
+
+  11. main.tsx에서 app.tsx 불러온 후 연결
+    import App from '$/app';
+      // 만들어진 React.FC 함수를 불러오는 기능
+      // 불러올때 첫글자를 "무조건" 대문자로
+    root.render(
+      <div>
+        Hello
+        <App/>
+        <App/>
+      </div>
+    );
+      // 불러온 함수를 태그처럼 사용해서 붙이는 문법
+
+  12. React의 기본 문법
+    - 1. 리액트는 태그로 이루어진다
+      리액트의 문법에서 작성하는 모든 결과물은 (React.FC의 Return Type)은 태그로 이루어진다
+      <div></div> 이런걸 쓸 수 있는 이유가 리액트에서 이러한 것을 사용하기 때문
+      그래서 우리가 만드는 Function Component의 return 에는 "무조건" 태그가 들어가야 한다
+    
+    - 2. 만약 태그가 아닌 변수의 내용등을 넣고 싶다면 {}를 써야한다
+      태그 중간 중간에 JS(TS)의 변수 내용을 쓰고 싶다면 {}를 쓰고 안에 적어야 한다
+        <div>{value}</dvi>
+    
+    - 3. 이렇게 만들어진 Component를 변수에 담아서 쓸때 첫글자를 대문자로 써야 태그처럼 쓸 수 있다
+      우리가 만든 react.FC는 함수로 만들고 사용하는것이기 때문에
+      일반 태그와 구조가 다르다
+      일반 태그와 구분하면서 태그로 쓰기위해서
+
+      ***우리가 만든 태그는 첫글자가 "대문자"여야지만 태그로써 사용이 가능하다
+    
+    - 4. 이렇게 만들어진 태그는 "무조건" 한개의 태그 아래에 존재해야한다
+      기본적으로 React는 번역을하는것이고 번역된 내용은 react.createElement()이런 모양이다
+      이때, 매개변수가 한개의 태그를 가지도록 만들어졌기 때문에 한번에 두개 이상의 태그를 받아오면 문제가 된다
+
+      return을 적을때 작성할 태그는 "무조건" 한개의 태그 아래에 작성을 해야한다
+      이러한 이슈를 해결하기위해 react에는 react.Fragment라는 "아무 의미없는 태그"가 존재한다
+        일정 버전 이상에서는 따로 이름을 안적고 <></> 빈태그를 적으면 Fragment로 동작
+    
+    - 5. 태그로 작성한 react.FC 컴포넌트에 매개변수를 넣는 방법은 속성처럼 넣는다
+      태그에 class, id 처럼 속성값을 넣는다
+      속성값을 넣는 방법으로 매개변수를 작성
+
+      단, 주의사항
+        만약에 단순 텍스트를 넣는다면 name='value' 형식으로 적으면 된다
+        변수의 값이나 숫자등을 넣어야한다면 내용을 적는것처럼 {}를 적어야한다 name={3} name={value}
+
+        내가 만든 태그는 일반 속성이 없다
+        그래서 props interface에 따로 만들어줘야한다
+        만들어줄때 class는 자료형과 겹치기 때문에 className이라는 이름으로 사용한다
+
+        onclick 같은 이벤트로 등록이 가능
+
+//////////////////////////////////////////// 연습 문제 ////////////////////////////////////////////
+0. 테이블 생성
+  - 1. 5x5 크기
+
+1. 테이블 생성
+  - 1. 원하는 크기로 생성
+  - 2. 색상 지정시 글자 색상 변경
+  - 3. 배경 지정시 배경 색상 변경
+
+2. 리스트 생성
+  - 1. 원하는 개수로 생성
+  - 2. ordered 옵션 지정시 ol, ul 변환
+  - 3. type 지정시 원하는 모양으로 지정
+
+https://zoom.us/rec/share/IH8v69pKhQcJtMKJppuvbbQEXXtIlB7sOSxBPCwlFEo1R7a-BmxrKvFltAvv3G6H.SQVDYjbE68l6bgaF 
+암호: FO9$!h?c

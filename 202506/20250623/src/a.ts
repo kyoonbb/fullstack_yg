@@ -1,34 +1,36 @@
+// 설명을 위한 강사님의 예시 코드임 크게 신경 ㄴㄴ
+
 let body:HTMLElement = document.body;
 let table:HTMLTableElement 
-  = document.createElement("table");
+    = document.createElement("table");
 body.appendChild(table);
 let tbody:HTMLElement
-  = document.createElement("tbody");
+    = document.createElement("tbody");
 table.appendChild(tbody);
 
 function createTable(
-  row:number, column:number
+    row:number, column:number
 ):void {
-  tbody.innerHTML = "";
-  for(
+    tbody.innerHTML = "";
+    for(
     let rowNum:number = 0;
     rowNum < row;
     rowNum += 1
-  ) {
+    ) {
     let tr:HTMLTableRowElement
-      = document.createElement("tr");
+        = document.createElement("tr");
     tbody.appendChild(tr);
     for(
-      let colNum:number = 0;
-      colNum < column;
-      colNum += 1
+        let colNum:number = 0;
+        colNum < column;
+        colNum += 1
     ) {
-      let td:HTMLTableCellElement
+        let td:HTMLTableCellElement
         = document.createElement("td");
-      tr.appendChild(td);
-      td.textContent = "글자";
+        tr.appendChild(td);
+        td.textContent = "글자";
+        }
     }
-  }
 }
 
 createTable(10, 10);

@@ -1,4 +1,4 @@
-{
+{ // 각각 옵션 설명을 그렇게 중요하진 않음
   "compilerOptions": {
     "target": "esnext",
     "jsx": "react-jsx",
@@ -10,9 +10,10 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*":["src/*"],
-      "$/*":["components/*"]
-    }
-  },
-  "include":["src","components"]
+        "@/*":["src/*"],
+        "$/*":["components/*"]
+      }
+    },
+    "include":["src","components"]
 }
+  
