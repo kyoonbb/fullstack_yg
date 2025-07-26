@@ -9,12 +9,12 @@ interface props {
 
 const modalComponent:react.FC<props> = (props:props)=>{
   return <react.Fragment>
-    <div className='modal-back' onClick={(e)=>{
-      if(e.currentTarget !== e.target) return;
-      if(props.onClickBack) props.onClickBack();
+    <div className='modal-back' onClick={(e)=>{ // 클릭 시
+      if(e.currentTarget !== e.target) return; // 배경쪽을 눌렀을 때 구분
+      if(props.onClickBack) props.onClickBack(); // 배경쪽을 눌렀을 대 온클릭 백 함수 뒤로가기 해줌
     }}
     style={{
-      display: props.isOpen ? 'block' : 'none',
+      display: props.isOpen ? 'block' : 'none', // none이 들어가면 모달창 안뜸, 이 줄 자체를 주석처리하고 실행해봐라 그럼 될거다
       backgroundColor:'rgba(0,0,0,0.32)',
       position:'fixed',
       top:0,

@@ -1,4 +1,4 @@
-import react, { useState } from 'react';
+import react, { useState } from 'react'; // 흔치는 않다.
 
 const useSessionStorage = 
 function<Type> (key:string, defValue:Type):[Type, Function]{

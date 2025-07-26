@@ -1,0 +1,60 @@
+훅을 사용하다보면 비슷하게 많이 이용하는 훅의 형태들이 생기게되는데
+이걸 성능을 이유로 그냥 코드로 짜자니 귀찮다
+
+이러한 훅의 형태들을 "내가 만든 훅"으로 만들어둔다면?
+그래서 훅을 이용할때 많이 이용되는 형태의 훅을 미리 만들어 둘 수 있고 -> Custom Hook(사용자 정의 훅)
+
+커스텀 훅의 원리
+  일반 훅처럼 함수를 만들고 함수의 결과가 렌더링에 관여하면 된다
+  커스텀 훅은 가상 DOM을 갱신하는 기능을 포함한 함수
+
+  커스텀 훅 안에서 이미 존재하는 훅을 쓴다면 내가 기능을 만들 수 있고
+  가상 DOM을 갱신할 수 도 있는 함수가 만들어진다
+
+  즉, 커스텀 훅을 만드는 제일 쉬운 방법은 함수 안에 훅을 사용하는것
+
+커스텀 훅을 이용한다면 훅을 사용하면서 생기는 긴 코드를 최대한 분할해서 작성할수 있게된다
+
+$$$ 여기선 src 밑에 hooks 폴더에 만들어져있다 ㅇㅇ
+
+*** 훅을 만들때 주의사항
+  훅 함수의 이름은 "무조건" "use이름" 으로 적어야한다 *** 매우 중요 : 일반함수와 구분을 하기 위함임
+
+JS에서 지원하는 폴더 import
+  폴더를 import 하면 -> 폴더 안에 있는 index.(js|ts|tsx|jsx) 파일이 호출된다
+  우리가 index안에 해당 폴더에있는 나머지 훅들을 import하고 export한다면? --> hooks 파일 안에 index.tsx있는데 여기 모여있다
+
+  제대로 적는거는 import 후에 export
+  간략하게 export {} from '파일'; 로 작성도 가능
+
+많이 이용되는 훅의 종류
+  useLocalStorage
+    단순한 정보를 사용자 PC에 저장하게 만드는 사용자 정의 훅 : 로컬에 쭉 남아있음 아마 pc 껏다키기 전까지
+  useSessionStorage
+    단순한 정보를 사용자 PC에 저장하게 만드는 사용자 정의 훅 : 창 껏다키면 사라짐 말그대로 세션
+  useDisclosure
+    모달창 등을 띄울때 visible, unvisible 등을 관리하도록 하는 사용자 정의 훅 $$$ components에 modal창 따로 만듦
+  useClamp
+    숫자의 범위를 지정하는 훅
+  useDebounce
+    일정 기간 입력이 없으면 그때 적용되는 훅 : 이유는 즉각 반응되면 리소스를 너무 잡아먹어서 그럼
+
+Naver 검색 URL
+  https://ac.search.naver.com/nx/ac?q=%EA%B2%80%E3%85%85&con=0&frm=nv&ans=2&r_format=json&r_enc=UTF-8&r_unicode=0&t_koreng=1&run=2&rev=4&q_enc=UTF-8&st=100&ackey=9qmewtqm
+
+/////////////////////////////////////// 연습 문제 ///////////////////////////////////////
+TodoList 제작
+  Todo 정보
+    title, content, visible
+    [ title ]
+    [content] 형식으로 보여야함
+    visible이 true면 그대로 보이고 false면 중간에 취소선이 그어져야한다
+  Todo정보를 클릭하면 visible을 true,false로 반전할 수 있도록
+
+  Todo 정보 입력은 Modal 창에서 입력
+  Modal 창은 입력 버튼 클릭시 생성
+  현재 입력한 내용이 화면에 어떻게 나올지 Modal창에서 예제 표시
+  예제는 debounce로 0.3초 입력이 없으면 그때 표시
+
+https://zoom.us/rec/share/S3Bgt0MkuLXhE9dEqNvwKldfj5FN6ViovhJVDebsiUSuv5Z2_xsY6G23TQIDP3o.h0ya3LAQKZ2OWDk6 
+암호: 0i=pL@Ve
