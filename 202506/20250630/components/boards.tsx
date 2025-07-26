@@ -1,3 +1,29 @@
+
+// // 1번 예제
+// import react, { useEffect, useRef, Suspense, lazy } from 'react';
+
+// interface props {
+// };
+
+// const appComponent:react.FC<props> = async (props:props)=>{
+//   const boards:any = await import('@/dummy/boards');
+//   return <react.Fragment>
+//     <ol>
+//       <li>
+//         <span>제목</span>
+//         <span>작성자</span>
+//         <span>작성일</span>
+//       </li>
+//       {boards.dummy}
+//     </ol>
+//   </react.Fragment>
+// };
+
+// export default appComponent;
+// // 1번 예제 끝
+
+
+// 2번 예제
 import react, { useEffect, useRef, Suspense, lazy } from 'react';
 
 interface props {
@@ -25,3 +51,4 @@ const appComponent:react.FC<props> = async (props:props)=>{
 };
 
 export default appComponent;
+// 2번 예제 끝

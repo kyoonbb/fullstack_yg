@@ -1,1 +1,1 @@
-export { dummy as dummy_boards } from './boards';
+export { dummy as dummy_boards } from './boards'; // 더미로 받고 더미 보드로 내보내겠다
