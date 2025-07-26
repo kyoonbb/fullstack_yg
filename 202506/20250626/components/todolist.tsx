@@ -24,7 +24,7 @@ const testComponent:react.FC<props> = (props:props)=>{
   }, [text]);
   const listCache = useMemo(()=><List datas={todos}/>, [todos]);
   return <react.Fragment>
-    <input ref={inputRef} onChange={inputHandler}/>
+    <input ref={inputRef} onChange={inputHandler}/> 
     <button onClick={buttonHandler}>등록</button>
     {listCache}
   </react.Fragment>
