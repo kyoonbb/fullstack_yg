@@ -1,0 +1,19 @@
+
+/* utility 예제 
+.bg-red {
+    background-color: red;
+}
+.txt-red {
+    color: red;
+}
+.bg-yellow {
+    background-color: yellow;
+}
+.txt-yellow {
+    color: yellow;
+} */
+
+/* tailwind 예제 */
+@import 'tailwindcss';
+
+/* @import 'tailwindcss' prefix(tw); 앞에 접두사로 설정한 tw 설정하면 안된다 혹시나 겹치는 상황이 생기면 저 접두사를 쓰면된다.*/
