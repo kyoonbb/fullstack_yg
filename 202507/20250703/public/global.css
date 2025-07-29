@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+
+@custom-variant dark {
+  &:where([data-theme=dark] *) {
+    @slot;
+  }
+}
+@custom-variant light {
+  &:where([data-theme=light] *) {
+    @slot;
+  }
+}
