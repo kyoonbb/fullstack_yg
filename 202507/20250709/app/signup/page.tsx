@@ -1,8 +1,8 @@
 import react from 'react';
 
-export default function page() {
+export default function page() { // method='get' 방식 불러오기
   return <div>
-    <form action='/api/signup' method='get'>
+    <form action='/api/signup' method='get'> 
       <fieldset style={{fontFamily:'consolas'}}>
         <legend>회원가입</legend>
         <label htmlFor='id'>ID : </label><input name='id' id='id'/><br/>
