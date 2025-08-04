@@ -1,0 +1,205 @@
+이전 시간까지 배운 내용은 NextJS를 이용해서 백엔드와 프론트엔드를 만드는 기술을 어느정도 해내었다
+이정도로 풀스택 서버를 개발할 수 있다
+
+하지만 지금까지 배운것으로만 개발하면 서버의 확장성이 떨어진다
+서버는 각자의 고유한 자원이 존재하고 해당하는 자원을 소비해서 서비스를 구동
+지금까지 배운 서버는 이러한 자원이 독립적일 수 밖에 없다
+해당 서버만 해당 자원에 영향을 끼친다
+
+왜냐하면 서버가 각자 독립적으로 구동되기 때문
+이러한 쟁점은 소규모 서비스일때는 장점이지만 대규모 서비스일때는 단점이된다
+
+서버의 리소스(자원)은 한계가 명확 -> Hardware
+이러한 리소스를 늘리고자한다면 하드웨어를 추가하거나 변경하면 된다
+하지만 이러한 리소스의 증가에는 한계가 있다
+
+이러한 리소스를 늘리고자할때 한대의 PC에서는 무한하게 늘릴수 도 없고
+여러대의 PC에서 늘리는게 비용상 더 좋다
+
+이런것을 흔히 양적 증가라고 부른다
+PC 한대의 성능을 올리는걸 질적 증가라고 부른다
+
+이러한 이슈들 때문에 대규모 프로젝트에서는 서버가 여러개가 구동되는 경우가 많다
+하지만 지금까지 배워왔던 NextJS 기반의 프로젝트에서는 서버가 2개 이상이되면 먹통이 되는 경우가 생긴다
+왜냐하면 각각의 NextJS는 각각의 서버에서 정보를 관리하기 때문
+이런 방식을 State 방식이라고 부른다
+
+이러한 State 방식의 구조는 양적 서버 상태에서는 환경 구현이 어렵기 때문에
+Stateless라는 방식을 선호한다
+
+Stateless 방식은 서버에 인증, 인가 정보 등을 저장하지 않고 사용자 PC에 저장함으로써
+사용자가 사용하는 서버가 양적 서버의 다른 서버로 이동되어도 사용자가 인증했는지를 손쉽게 판별하게한다
+$$$ 이러면 서버가 수백개 수천개 될수도 있다. 모든서버를 하나처럼 이용할 수 도 있다
+
+양적 서버 구현에는 보통 Stateless를 선호한다
+하지만 무조건 Stateless를 써야만 한다는건 아니다
+
+왜냐하면 Stateless에는 매우 치명적인 단점이 있기 때문
+바로 보안 문제가 있다는것
+
+그럼에도 Stateless는 그에 걸맞는 충분한 이점이 있다
+
+이러한 Stateless 기술 중에서도 한가지를 사용할것 -> JWT(Json Web Token)
+
+JWT(Json Web Token)
+  사용자의 아이디 혹은 인증 정보를 Json의 형태로 Packaging하고 
+  문자열로 Stringify 한다
+  구한 문자열을 암호화한다
+  이걸 사용자 PC에 Cookie로 저장
+
+  이렇게 Cookie에 저장된 암호문을 서버에서 받아오면 복호화해서 평가
+
+즉, 오늘 배울 내용은 이러한 JWT를 서버에 어떻게 만들고 어떻게 구현할지이다
+
+JWT 구현을 위해 미리 예습 코드를 작성
+  // /login
+  import react from 'react';
+  export default function login_page(){
+    return <div>
+      <form action="/api/login" method="post">
+        <input name="id"/> <br/>
+        <input name="pw" type="password"/> <br/>
+        <button type='submit'>로그인</button>
+      </form>
+    </div>
+  }
+
+  // /api/login
+  import { NextRequest, NextResponse } from "next/server";
+  export async function POST(req:NextRequest):Promise<NextResponse> {
+    const form = await req.formData();
+    const [id, pw] = [form.get('id'), form.get('pw')];
+    if(id == 'abcd' && pw == '1234') {
+      return NextResponse.redirect("http://localhost:3000/");
+    }
+    else return NextResponse.redirect("http://localhost:3000/login");
+  }
+
+
+예습 코드에서 JWT 코드를 남기기위한 기능을 추가해야하는데 
+이걸 직접 만드는건 너무 번거롭다
+왜냐하면 JWT를 만들기 위해서는
+  인증 정보 확인
+  인증 정보 JSON화
+  인증 정보 Stringify
+  인증 정보 암호화(비공개키)
+  인증 정보 쿠키 생성
+이러한 단계가 필요한데 한개씩 다 만드는건 귀찮다
+그래서 이걸 해주는 JWT package를 사용할것 -> jsonwebtoken
+
+jsonwebtoken $$$ 새로운 명령어 
+  JWT 관련 기능을 미리 만들어둔 패키지
+  npm install jsonwebtoken 으로 설치
+  npm install --save-dev @types/jsonwebtoken 로 자료형 설치해야 typescript에서 동작
+
+이러한 JWT를 암호화할때 복호화를 하기위한 키값을 지정하는데
+키값을 사용자는 모르고 나는 손쉽게 변경할 수 있도록 .env에 지정
+또한 해당 쿠키값이 저장될 이름도 .env에 지정
+  JWT_SECRET=암호화키값
+  JWT_COOKIE_NAME=이름
+
+이러한 JWT 기능을 여러 페이지에서 매우 많이 사용하기 때문에 utility 함수로 따로 패키지처럼 작성해둔다
+제일 처음에는 JWT에 보관할 정보를 interface로 구성
+필요한것만 넣어두는게 좋고 보편적으로 아이디만 넣어도 충분
+
+// /util/jwt.ts
+  import { NextResponse } from 'next/server';
+  import jwt from 'jsonwebtoken';
+
+  const JWT_SECRET = process.env.JWT_SECRET || 'secret';
+
+  export interface JWTPayload {
+    userId:string;
+    iat?:number;
+    exp?:number;
+  };
+  export function signJWT(payload:Omit<JWTPayload, 'iat' | 'exp'>):string {
+    return jwt.sign(payload, JWT_SECRET, {
+      expiresIn: '3h'
+    });
+  }
+  export function verifyJWT(token:string):JWTPayload | null {
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET) as JWTPayload;
+      return decoded;
+    } catch {
+      return null;
+    }
+  }
+
+  export function getJWTFromCookiesAsString(cookieHeader:string | null):string | null {
+    if(!cookieHeader) return null;
+    // A=b;C=d;
+    const cookies = cookieHeader.split(";").reduce((acc, cookie)=>{
+      const [key, value] = cookie.trim().split('=');
+      acc[key] = value;
+      return acc;
+    }, {} as Record<string, string>);
+    const cookieName = process.env.JWT_COOKIE_NAME || 'auth';
+    const token = cookies[cookieName];
+    if(!token) return null;
+    return token;
+  }
+
+  export function getJWTFromCookies(cookieHeader:string | null):JWTPayload | null {
+    const jwtToken = getJWTFromCookiesAsString(cookieHeader);
+    if(!jwtToken) return null;
+    return verifyJWT(jwtToken);
+  }
+
+  export function addJWT(payload:JWTPayload, res:NextResponse):NextResponse {
+    const cookieName = process.env.JWT_COOKIE_NAME || 'auth';
+    const cookieOptions = {
+      maxAge: 10800
+    };
+    res.cookies.set(cookieName, signJWT(payload), cookieOptions);
+    return res;
+  }
+
+
+이 함수들을 이용해서 /api/login/route.tsx 에 addJWT로 로그인시 JWT 생성
+이러한 인증을 통해서 사용자의 접근을 제어할 수 있는데
+만약 사용자가 page를 요청하면 page에서는 NextRequest, NextResponse를 쓸 수 없다
+그래서 따로 fetch로 처리해야한다
+문제는 CSR은 그냥 쓰면 되는데 SSR일때는 사용자 cookie 정보가 자동으로 안담긴다
+
+그래서 SSR일때 fetch를 해야하는경우
+  import { cookies } from 'next/headers';
+  fetch(url, { credentials:'include', header:{ cookie: cookies() } });
+  그리고 cookies는 Promise 기반이기 때문에 async로 만들어야한다
+하지만 CSR은 fetch시 쿠키가 그냥 담기기 때문에 그대로 사용하면 된다
+
+이러한 JWT가 만료된다면?
+서버 사용중에 갑자기 로그아웃된것처럼 동작한다
+그렇기에 JWT를 일정 시간 미만으로 만료기한이 남으면 갱신해야한다
+그리고 이것고 함수로 미리 만들어둔다
+
+// /util/jwt.ts
+  export function isTokenExpiringSoon(token:JWTPayload):boolean {
+    const expiryTime = token.exp;
+    if(!expiryTime) return true;
+    const now = Math.floor(Date.now() / 1000);
+    const timeUntilExpiry = expiryTime - now;
+    return timeUntilExpiry <= 3600;
+  }
+
+  export function refreshToken(req:NextRequest, res:NextResponse):NextResponse {
+    try {
+      const cookieHeader = req.headers.get("cookie");
+      const payload:JWTPayload|null = getJWTFromCookies(cookieHeader);
+      if(payload && isTokenExpiringSoon(payload)) {
+        addJWT({
+          userId:payload.userId
+        }, res);
+      }
+    } finally {
+      return res;
+    }
+  }
+
+위 두개의 함수를 추가하여 만료기한을 판별하고 만료기한이 임박하면 갱신하도록 기능을 추가
+이렇게 만료기한을 판별하고 임박하면 갱신해야 사용자가 원활하게 서버 사용을 할 수 있다.
+
+연습 문제 사이트
+  https://code-study.kafolio.kr
+  아이디 - 본명

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getJWTFromCookies, JWTPayload, refreshToken } from '&/jwt';
 
 export function GET(req:NextRequest):NextResponse {
-  const cookieHeader = req.headers.get("cookie");
+  const cookieHeader = req.headers.get("cookie"); // Request에서 cookie라고 하면 꺼내올 수 있음
   const payload:JWTPayload | null = getJWTFromCookies(cookieHeader);
   if(!payload) return NextResponse.json({message:"로그인이 필요합니다."});
   return refreshToken(req, 
